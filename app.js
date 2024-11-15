@@ -23,6 +23,22 @@ app.get('/perfil', (req, res) => {
     res.render('profile');
 })
 
+app.get('/meuscursos', (req, res) => {
+  res.render('mycourses');
+})
+
+app.get('/configuracoes', (req, res) => {
+  res.render('settings');
+})
+
+app.get('/login', (req, res) => {
+  res.render('login');
+})
+
+app.get('/registro', (req, res) => {
+  res.render('signup');
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 })
