@@ -1,11 +1,9 @@
 const express = require('express');
-import isFullwidthCodePoint from './node_modules/is-fullwidth-code-point/index.d';
 const app = express();
 const mysql = require('mysql2');
 const port = 3000;
 const path = require('path');
 const ejs = require("ejs");
-const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 
 const db = mysql.createConnection({
@@ -36,6 +34,7 @@ app.get('/', (req, res) => {
 app.get('/cursos', (req, res) => {
     res.render('courses');
 })
+
 
 app.get('/perfil', (req, res) => {
     res.render('profile');
@@ -73,33 +72,20 @@ app.post('/submit', async (req, res) => {
 
 app.get('/login', (req, res) => {
   res.render('login');
+})
 
+
+app.post('/login', (req, res) => {
   const { email, senha } = req.body;
 
-  const query = 'SELECT * FROM usuario WHERE email = ?';
-
-  db.query(query, [email], async (err, results) => {
-    if (err) {
-      console.error('Erro ao buscar usuário:', err);
-      res.send('Erro ao realizar login.');
-      return;
-    }
-
-    if (results.length === 0) {
-      res.send('Usuário não encontrado.');
-      return;
-    }
-
-    const user = results[0];
+  const queryLogin = 'SELECT * FROM usuario WHERE email = ?';
   
-    const isPasswordValid = await bcrypt.compare(senha, user.senha);
-    if (!isPasswordValid) {
-      res.send('Senha incorreta.');
+    if (senha == queryLogin) {
+      res.send('Senha correta.');
       return;
     } else {
-      res.render('')
+      res.send('Senha incorreta')
     }
-  });
 });
 
 app.listen(port, () => {
