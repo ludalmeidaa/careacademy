@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
   res.render('home');
 })
 
+app.get('/logado', (req, res) => {
+  res.render('homel');
+})
+
 app.get('/cursos', (req, res) => {
     res.render('courses');
 })
@@ -43,11 +47,6 @@ app.get('/perfil', (req, res) => {
 app.get('/meuscursos', (req, res) => {
   res.render('mycourses');
 })
-
-app.get('/configuracoes', (req, res) => {
-  res.render('settings');
-})
-
 
 app.get('/registro', (req, res) => {
   res.render('signup');
@@ -87,6 +86,15 @@ app.post('/login', (req, res) => {
       res.send('Senha incorreta')
     }
 });
+
+app.get('/curso-de-excel-para-iniciantes', (req, res) => {
+  res.render('morecourse1');
+})
+
+app.get('/curso-de-introducao-ao-word', (req, res) => {
+  res.render('morecourse2');
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
